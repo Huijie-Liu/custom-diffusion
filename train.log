@@ -1,0 +1,57 @@
+cat
+data/cat
+real_reg/samples_cat
+cat
+finetune_addtoken.yaml
+checkpoints/sd-v1-4.ckpt
+Traceback (most recent call last):
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/site-packages/requests/models.py", line 971, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/json/__init__.py", line 357, in loads
+    return _default_decoder.decode(s)
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "src/retrieve.py", line 92, in <module>
+    retrieve(args.target_name, args.outpath, args.num_class_images)
+  File "src/retrieve.py", line 28, in retrieve
+    results = client.query(text=target_name)
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/site-packages/clip_retrieval/clip_client.py", line 84, in query
+    return self.__search_knn_api__(text=text)
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/site-packages/clip_retrieval/clip_client.py", line 131, in __search_knn_api__
+    return requests.post(
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/site-packages/requests/models.py", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Global seed set to 23
+Running on GPUs 0,1
+CustomDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Monitoring val/loss_simple_ema as checkpoint metric.
+Merged modelckpt-cfg: 
+{'target': 'pytorch_lightning.callbacks.ModelCheckpoint', 'params': {'dirpath': 'logs/2024-04-03T18-21-09_cat-sdv4/checkpoints', 'filename': '{epoch:06}', 'verbose': True, 'save_last': True, 'monitor': 'val/loss_simple_ema', 'save_top_k': -1, 'every_n_epochs': 1}}
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+
+Traceback (most recent call last):
+  File "train.py", line 917, in <module>
+    data.prepare_data()
+  File "/data2/lhj/.conda/envs/ldm/lib/python3.8/site-packages/pytorch_lightning/core/datamodule.py", line 428, in wrapped_fn
+    fn(*args, **kwargs)
+  File "/data2/lhj/custom-diffusion/train.py", line 382, in prepare_data
+    instantiate_from_config(data_cfg)
+  File "/data2/lhj/custom-diffusion/stable-diffusion/ldm/util.py", line 85, in instantiate_from_config
+    return get_obj_from_str(config["target"])(**config.get("params", dict()))
+  File "/data2/lhj/custom-diffusion/src/finetune_data.py", line 149, in __init__
+    with open(reg_datapath, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'real_reg/samples_cat/images.txt'
